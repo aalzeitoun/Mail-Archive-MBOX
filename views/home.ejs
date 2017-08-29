@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Node.js Blog</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <style>
+        body {
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        .jumbotron {
+          margin-top: 1px;
+              padding-top: 8px;
+              padding-bottom: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <%- include('partials/navbar') %>
+        <div class="jumbotron">
+            <h2>Mail Archiving</h2>
+            <p class="lead">Check out your mail archives below!</p>
+        </div>
+
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="list-group">
+                  <% allemails.forEach((allemail) => { %>
+                    <a href="/post/<%= allemail.id %>" class="list-group-item">
+                      <h4 class="list-group-item-heading"><% if(allemail.subject){%> <%= allemail.subject %><% }else{%>(no subject)<% } %></h4>
+                      <p class="list-group-item-text">From: <%= allemail.from.value[0].name+" "+allemail.from.text %> </p>
+                      <% if(allemail.cc){%><p class="list-group-item-text"><i>Cc: <%= allemail.cc.text %></i></p> <% } %>
+                      <% if(allemail.bcc){%><p class="list-group-item-text"><i>Bcc: <%= allemail.bcc.text %></i></p> <% } %>
+                      <p class="list-group-item-text"><%= allemail.date %> </p>
+                      <% if(allemail.attachment){%><p class="list-group-item-text">Attachments: <%= allemail.attachment.filename %></i></p> <% }%> </p>
+                      
+                    </a>
+                  <% }) %>
+                </div>
+            </div>
+        </div>
+
+        <%- include('partials/footer') %>
+    </div>
+</body>
+
+</html>
