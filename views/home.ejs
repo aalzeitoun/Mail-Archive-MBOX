@@ -38,8 +38,6 @@
                       <% if(allemail.cc){%><p class="list-group-item-text"><i>Cc: <%= allemail.cc.text %></i></p> <% } %>
                       <% if(allemail.bcc){%><p class="list-group-item-text"><i>Bcc: <%= allemail.bcc.text %></i></p> <% } %>
                       <p class="list-group-item-text"><%= allemail.date %> </p>
-                      <% if(allemail.attachment){%><p class="list-group-item-text">Attachments: <%= allemail.attachment.filename %></i></p> <% }%> </p>
-                      
                     </a>
                   <% }) %>
                 </div>
