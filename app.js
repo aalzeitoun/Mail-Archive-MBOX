@@ -7,7 +7,7 @@ const dateFormat = require('dateformat');
 
 
 var Mbox = require('node-mbox');
-var mbox  = new Mbox('UNU-IHDP.mbox', { });
+var mbox  = new Mbox('test.mbox', { });
 var id = 1;
 app.locals.allemails =[];
 
