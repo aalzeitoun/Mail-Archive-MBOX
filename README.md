@@ -7,7 +7,6 @@ $ npm install express
 $ npm install ejs
 $ npm install dateformat
 $ npm install prettysize
-$ npm install base64-arraybuffer
 ```
 
 ## Usage
