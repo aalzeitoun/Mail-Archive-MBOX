@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <title><%= subject %> | Node.js Blog</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="node_modules/prettysize/index.js"></script>
     <style>
         body {
             padding-top: 20px;
@@ -15,7 +16,27 @@
 
 <body>
     <div class="container">
-        <%- include('partials/navbar') %>
+        <%- include('partials/navbar'); %>
+        <hr>
+        <div class="row">
+          <% var hideback, hidenext, next, back;
+          if(id > 1 || id< (attachment.length-1) ){
+            next= id + 1;
+            back= id - 1;
+
+          }
+          if(id==1){
+            hideback="display: none";
+            next= id + 1;
+          }
+          if(id == allemail.length){
+            hidenext="display: none";
+            back= id - 1;
+          }%>
+          <div  class="col-md-6"><a style='<%= hideback %>' href="<%= back %>" class="btn btn-primary" role="button">back</a></div>
+          <div class="col-md-6 text-right"><a style='<%= hidenext %>'  href="<%= next %>" class="btn btn-primary" role="button">next</a></div>
+        </div>
+
         <div>
             <h2><% if(subject){%> <%= subject %><% }else{%>(no subject)<% } %></h2>
             <p><b>From: <%- from.html %></b>
@@ -25,8 +46,26 @@
                         <br>Cc: <%- cc.html%> <% } %>
             <% if(bcc){%>
                         <br>Bcc: <%- bcc.html%> <% } %>
-            <br>Date: <%= date %></p>
-        
+            <br>Date: <%= date %>
+            <br>
+              <%
+              var isAttach = false;
+                attachment.forEach(function(item){
+                  if(item.contentDisposition == 'attachment'){
+                    isAttach = true;
+                   }
+                })
+              if(isAttach){
+                if(attachment.length>1){%><%= attachment.length %> Attachments: <%}else{%><%= attachment.length %> Attachment: <%}%>
+              <% for(i=0; i < attachment.length; i++){
+                    if(attachment[i].contentDisposition == 'attachment'){
+                      var size = prettysize(attachment[i].size, false, true, 2); %>
+
+                      <b><a href=<%= '/attachments/'+id+'/'+encodeURI(attachment[i].filename) %> >-<%= attachment[i].filename %></a> </b>(<%= size %>)&nbsp;&nbsp;
+                <% }
+                  }
+                }%>
+            </p>
 
             <p><%- body %></p>
             <hr>

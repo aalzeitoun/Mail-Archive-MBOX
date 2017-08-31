@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <title>Node.js Blog</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
     <style>
         body {
             padding-top: 10px;
@@ -16,12 +17,55 @@
               padding-top: 8px;
               padding-bottom: 8px;
         }
+
+        .dropdown.dropdown-lg .dropdown-menu {
+            margin-top: -1px;
+            padding: 6px 20px;
+        }
+        .input-group-btn .btn-group {
+            display: flex !important;
+        }
+        .btn-group .btn {
+            border-radius: 0;
+            margin-left: -1px;
+        }
+        .btn-group .btn:last-child {
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px;
+        }
+        .btn-group .form-horizontal .btn[type="submit"] {
+          border-top-left-radius: 4px;
+          border-bottom-left-radius: 4px;
+        }
+        .form-horizontal .form-group {
+            margin-left: 0;
+            margin-right: 0;
+        }
+        .form-group .form-control:last-child {
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+        }
+
+        @media screen and (min-width: 768px) {
+            #adv-search {
+                width: 500px;
+                margin: 0 auto;
+            }
+            .dropdown.dropdown-lg {
+                position: static !important;
+            }
+            .dropdown.dropdown-lg .dropdown-menu {
+                min-width: 500px;
+            }
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
         <%- include('partials/navbar') %>
+        <%- include('partials/searchbox') %>
+        <hr>
         <div class="jumbotron">
             <h2>Mail Archiving</h2>
             <p class="lead">Check out your mail archives below!</p>
@@ -38,6 +82,15 @@
                       <% if(allemail.cc){%><p class="list-group-item-text"><i>Cc: <%= allemail.cc.text %></i></p> <% } %>
                       <% if(allemail.bcc){%><p class="list-group-item-text"><i>Bcc: <%= allemail.bcc.text %></i></p> <% } %>
                       <p class="list-group-item-text"><%= allemail.date %> </p>
+                      <% var isAttach = false;
+                          for(i=0; i < allemail.attachment.length; i++){
+                            if(allemail.attachment[i].contentDisposition == 'attachment'){
+                                isAttach = true;
+                            }
+                          }
+                          if(isAttach){ %>
+                            <p class="list-group-item-text"><i>Attachment# <%= allemail.attachment.length %></i></p>
+                      <%   }  %>
                     </a>
                   <% }) %>
                 </div>
