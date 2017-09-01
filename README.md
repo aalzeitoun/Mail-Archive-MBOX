@@ -1,16 +1,13 @@
 # Mail-Archive-MBOX
 
-## Installation
+It has two directories: development, documentation and presentation
 
-```bash
-$ npm install express
-$ npm install ejs
-$ npm install dateformat
-$ npm install prettysize
-```
+## development
 
-## Usage
-This is a draft project, more details will come later!
+Source code of the project
+
+## documentation and presentation
+documentation and presentation of the project!
 
 
 
@@ -19,4 +16,3 @@ This is a draft project, more details will come later!
 ## License
 
 (c) 2017 Ahmad Alzeitoun, Nayef Roqaya, University of Bonn.
-.
